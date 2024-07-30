@@ -114,6 +114,7 @@ if not external
     'bzip2':    [ 'BZLIB_DELEGATE' ],
     'zstd':     [ 'ZSTD_DELEGATE' ],
     'lzma':     [ 'LZMA_DELEGATE' ],
+    'rsvg':     [ 'RSVG_DELEGATE' ],
     'openmp':   [ 'OPENMP_SUPPORT' ],
     'display':  [ 'X11_DELEGATE' ],
     'cairo':    [ 'CAIRO_DELEGATE' ],

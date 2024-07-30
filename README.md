@@ -254,6 +254,7 @@ Additionally, the following options control the various ImageMagick submodules. 
 * `--disable-openmp` for `OpenMP` (supported only on Linux/native and macOS/native)
 * `--disable-display` for `X11` (supported only on Linux/native and macOS/native with Quartz), no `conan` variant as it always uses the system libraries
 * `--disable-cairo` for `cairo` (always disabled for WASM)
+* `--disable-rsvg` for `rsvg` (always disabled for WASM, ImageMagick will still support .svg but with its own internal renderer)
 
 When disabling the built-in static delegates with `--disable-*-conan`, the ImageMagick configure script will still detect the presence of compatible system libraries and will try to use them, producing a custom binary that will need the dynamically loaded versions of those libraries on your system. The system-installed libraries will be detected through the use of the standard `CMake` supplied modules and, when that fails, on Linux and macOS, through `pkg-config`.
 
