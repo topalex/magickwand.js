@@ -148,7 +148,7 @@
       "argsConanShared": "--build=missing --settings=build_type={{ properties.buildType | capitalize }}",
       "argsConanNative": "-pr=./hadron/{{ properties.toolchain }}-{{ os.platform }}.profile",
       "argsConanWASM": "-pr=./hadron/{{ properties.toolchain }}.profile",
-      "commandConanLocalRepo": "conan remote add ImageMagick deps/ImageMagick/conan-local --allowed-packages=\"librsvg/*\" --force",
+      "commandConanLocalRepo": "conan remote add ImageMagick deps/ImageMagick/conan-local --allowed-packages librsvg/* --force",
       "commandConanDependencies": "{{ properties.commandConanLocalRepo }} && conan install . {{ properties.argsConanShared }} -of {{ properties.buildFolderRelativePath }}",
       "commandDependenciesNative": "{{ properties.commandConanDependencies }} {{ properties.argsConanNative }}",
       "commandDependenciesWASM": "{{ properties.commandConanDependencies }} {{ properties.argsConanWASM }}",
