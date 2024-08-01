@@ -74,6 +74,7 @@
         "flex/2.6.4#e35bc44b3fcbcd661e0af0dc5b5b1ad4%1674818991.113",
         "cmake/3.30.1#6d832cf2d46f6ec969ca5ed5b41f91eb%1721643748.186",
         "bzip2/1.0.8#457c272f7da34cb9c67456dd217d36c4%1703591832.799",
+        "automake/1.16.5#058bda3e21c36c9aa8425daf3c1faf50%1688481772.751",
         "autoconf/2.71#f9307992909d7fb3df459340f1932809%1711983104.648"
     ],
     "python_requires": [],
