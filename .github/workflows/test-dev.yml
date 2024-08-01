@@ -53,6 +53,10 @@ jobs:
       - name: Install fonts on Ubuntu
         run: sudo apt-get install -y fonts-ubuntu || true
         if: startsWith(matrix.platform, 'ubuntu')
+      - name: Install cargo-c from crates.io (for librsvg)
+        uses: baptiste0928/cargo-install@v3
+        with:
+          crate: cargo-c
       - name: Build magickwand.js
         run: npm install --build-from-source --verbose --foreground-scripts --skip-magickwand-wasm
       - run: npx mocha test/node.test.ts test/integration.test.ts
@@ -103,7 +107,7 @@ jobs:
             --disable-fonts --enable-jpeg --enable-png --disable-tiff                     \
             --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia           \
             --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif   \
-            --disable-color --disable-xml --enable-gzip --disable-zip                     \
+            --disable-color --disable-xml --enable-gzip --disable-zip --disable-rsvg      \
             --disable-bzip2 --disable-zstd --disable-xz --disable-lzma --disable-simd     \
             --disable-openmp --disable-display --disable-jbig --disable-cairo             \
             --skip-magickwand-wasm
@@ -201,7 +205,7 @@ jobs:
             --disable-fonts --enable-jpeg --enable-png --disable-tiff                   \
             --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia         \
             --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif \
-            --disable-color --disable-xml --enable-gzip --disable-zip                   \
+            --disable-color --disable-xml --enable-gzip --disable-zip --disable-rsvg    \
             --disable-bzip2 --disable-zstd --disable-xz --disable-lzma --disable-simd   \
             --disable-openmp --disable-display --disable-jbig --disable-cairo           \
             --skip-magickwand-native
@@ -253,6 +257,10 @@ jobs:
       - name: Install fonts on Ubuntu
         run: sudo apt-get install -y fonts-ubuntu || true
         if: startsWith(matrix.platform, 'ubuntu')
+      - name: Install cargo-c from crates.io (for librsvg)
+        uses: baptiste0928/cargo-install@v3
+        with:
+          crate: cargo-c
       - name: Install the dependencies
         run: npm install --skip-magickwand-wasm --skip-magickwand-native
       - name: Build with ASAN
