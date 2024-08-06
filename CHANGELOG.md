@@ -2,7 +2,7 @@
 
 # [2.0.0]
 
- - ImageMagick 7.1.1-32
+ - ImageMagick 7.1.1-36
  - Completely redesigned fully portable build using the new `hadron` build system (`xpm` + `meson / node-api` + `conan`)
    - Fully self-contained static build that does not depend on any system libraries (`conan`)
    - Identical on all three supported OS - Linux, Windows and macOS - and browser WASM (`meson / node-api`)
@@ -14,6 +14,7 @@
    - Support rebuilding from source with Python 3.12 without `distutils`
  - Drop macOS 11 support
  - macOS 14 `arm64` prebuilt binaries and support for rebuilding from source on macOS 14 `arm64`
+ - The generation of the SWIG wrappers and the `npm` package is now reproducible and hosted in Github Actions, and the generated wrappers are included in the published package
 
 
 ## [1.1.0] 2024-04-17

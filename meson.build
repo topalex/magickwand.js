@@ -45,8 +45,6 @@ if meson.get_compiler('cpp').get_id() == 'emscripten'
   # Embed these files into the WASM bundle
   add_global_link_arguments(
     [
-      # Export the FS subsystem
-      '-sEXPORTED_RUNTIME_METHODS=["FS"]',
       # This one is used for unit testing, it is only 4Kb
       f'--embed-file=@root_dir@/test/data/wizard.gif@wizard.gif',
       # These are needed by ImageMagick
@@ -65,8 +63,6 @@ if meson.get_compiler('cpp').get_id() == 'msvc'
       # The SWIG-generated wrapper for Magick++::Image is huge
       # and requires compiling with /bigobj on Windows
       '/bigobj',
-      # https://github.com/actions/runner-images/issues/10004
-      '/D_DISABLE_CONSTEXPR_MUTEX_CONSTRUCTOR'
     ], language: 'cpp')
 endif
 
@@ -174,6 +170,8 @@ main_target = napi.extension_module(
     # Node.js is excluded from the WASM loader on purpose:
     # * it has its own native build that is much better than WASM
     # * and including it produces a loader that confuses web bundlers such as Webpack
-    'environments': ['web','webview','worker']
-    },
+    'environments': ['web','webview','worker'],
+    # Export the FS subsystem
+    'exported_runtime_methods': ['emnapiInit', 'FS']
+  }
 )

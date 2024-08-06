@@ -13,14 +13,44 @@ on:
       - 'README.md'
 
 jobs:
+  swig:
+    runs-on: ubuntu-latest
+    name: Generate the SWIG wrappers
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        submodules: true
+    - uses: mmomtchev/setup-swig@main
+      with:
+        branch: jse
+        version: v5.0.4
+
+    - name: Verify SWIG
+      run: swig-jse -version
+
+    - name: Run SWIG to generated the wrappers
+      run: npx xpm run generate
+
+    - name: Upload SWIG-generated wrappers
+      uses: actions/upload-artifact@v4
+      with:
+        name: swig
+        path: swig/*
+
   native:
     runs-on: ${{ matrix.platform }}
+    needs: swig
 
     strategy:
       fail-fast: false
       matrix:
         platform: 
-          - ubuntu-latest
+          - ubuntu-20.04
+          - ubuntu-22.04
+          - ubuntu-24.04
           - macos-12
           - macos-latest
           - windows-latest
@@ -34,6 +64,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18.x
+      - name: Download the SWIG-generated wrappers
+        uses: actions/download-artifact@v4
+        with:
+          name: swig
+          path: swig
       - name: Install the xpacks
         run: |
           npm install xpm
@@ -49,7 +84,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ steps.conan_home.outputs.path }}
-          key: ${{ runner.os }}-${{ runner.arch }}-conan
+          key: conan-${{ matrix.platform }}
       - name: Install fonts on Ubuntu
         run: sudo apt-get install -y fonts-ubuntu || true
         if: startsWith(matrix.platform, 'ubuntu')
@@ -59,6 +94,9 @@ jobs:
           crate: cargo-c
       - name: Build magickwand.js
         run: npm install --build-from-source --verbose --foreground-scripts --skip-magickwand-wasm
+        env:
+          C_INCLUDE_PATH: /usr/local/include
+          CPLUS_INCLUDE_PATH: /usr/local/include
       - run: npx mocha test/node.test.ts test/integration.test.ts
         env:
           MOCHA_INTEGRATION: node
@@ -66,6 +104,7 @@ jobs:
 
   native-light:
     runs-on: ${{ matrix.platform }}
+    needs: swig
 
     strategy:
       fail-fast: false
@@ -81,6 +120,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18.x
+      - name: Download the SWIG-generated wrappers
+        uses: actions/download-artifact@v4
+        with:
+          name: swig
+          path: swig
       - name: Install the xpacks
         run: |
           npm install xpm
@@ -117,6 +161,7 @@ jobs:
 
   wasm:
     runs-on: ubuntu-latest
+    needs: swig
 
     strategy:
       fail-fast: false
@@ -134,6 +179,11 @@ jobs:
         uses: mymindstorm/setup-emsdk@v14
         with:
           version: 3.1.53
+      - name: Download the SWIG-generated wrappers
+        uses: actions/download-artifact@v4
+        with:
+          name: swig
+          path: swig
       - name: Install the xpacks
         run: |
           npm install xpm
@@ -157,7 +207,7 @@ jobs:
           echo "::notice::Default WASM version is $(( `gzip -9c lib/binding/emscripten-wasm32/magickwand.wasm | wc -c` / 1024 )) KBytes gzipped"
           echo "::notice::Default WASM version is $(( `brotli -9c lib/binding/emscripten-wasm32/magickwand.wasm | wc -c` / 1024 )) KBytes brotlied"
       - name: Run headless test
-        uses: GabrielBB/xvfb-action@v1
+        uses: coactions/setup-xvfb@v1
         env:
           MOCHA_INTEGRATION: browser
           MOCHA_MAGICK_INSTALL: ln -s ${{ github.workspace }} node_modules/magickwand.js
@@ -166,6 +216,7 @@ jobs:
 
   wasm-light:
     runs-on: ubuntu-latest
+    needs: swig
 
     strategy:
       fail-fast: false
@@ -183,6 +234,11 @@ jobs:
         uses: mymindstorm/setup-emsdk@v14
         with:
           version: 3.1.53
+      - name: Download the SWIG-generated wrappers
+        uses: actions/download-artifact@v4
+        with:
+          name: swig
+          path: swig
       - name: Install the xpacks
         run: |
           npm install xpm
@@ -214,7 +270,7 @@ jobs:
           echo "::notice::Light WASM version is $(( `gzip -9c lib/binding/emscripten-wasm32/magickwand.wasm | wc -c` / 1024 )) KBytes gzipped"
           echo "::notice::Light WASM version is $(( `brotli -9c lib/binding/emscripten-wasm32/magickwand.wasm | wc -c` / 1024 )) KBytes brotlied"
       - name: Run headless test
-        uses: GabrielBB/xvfb-action@v1
+        uses: coactions/setup-xvfb@v1
         env:
           MOCHA_LIGHT: 1
           MOCHA_INTEGRATION: browser
@@ -223,6 +279,7 @@ jobs:
 
   debug-asan:
     runs-on: ${{ matrix.platform }}
+    needs: swig
 
     strategy:
       fail-fast: false
@@ -238,6 +295,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18.x
+      - name: Download the SWIG-generated wrappers
+        uses: actions/download-artifact@v4
+        with:
+          name: swig
+          path: swig
       - name: Install the xpacks
         run: |
           npm install xpm
@@ -277,6 +339,7 @@ jobs:
 
   external:
     runs-on: ${{ matrix.platform }}
+    needs: swig
 
     strategy:
       fail-fast: false
@@ -292,6 +355,11 @@ jobs:
         with:
           fetch-depth: 0
           submodules: recursive
+      - name: Download the SWIG-generated wrappers
+        uses: actions/download-artifact@v4
+        with:
+          name: swig
+          path: swig
       - name: Build and install ImageMagick-7
         run: |
           cd deps/ImageMagick
