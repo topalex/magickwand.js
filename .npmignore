@@ -3,6 +3,7 @@ Attic
 .git
 .github
 .vscode
+.idea
 
 node_modules
 build
