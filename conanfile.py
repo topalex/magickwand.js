@@ -198,9 +198,9 @@ class ImageMagickDelegates(ConanFile):
         self.options['gdk-pixbuf'].with_libpng = self.options.png
         self.options['gdk-pixbuf'].with_libtiff = self.options.tiff
         self.options['gdk-pixbuf'].with_libjpeg = 'libjpeg-turbo'
-        self.options['pango'].with_xft = False
-        self.options['pango'].with_freetype = fonts_enabled
-        self.options['pango'].with_fontconfig = fonts_enabled and self.settings.os != 'Windows'
+      #  self.options['pango'].with_xft = False
+      #  self.options['pango'].with_freetype = fonts_enabled
+      #  self.options['pango'].with_fontconfig = fonts_enabled and self.settings.os != 'Windows'
 
       # While Emscripten supports SIMD, Node.js does not and cannot run the resulting WASM bundle
       # The performance gain is not very significant and it has a huge compatibility issue
