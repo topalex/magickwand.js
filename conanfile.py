@@ -49,7 +49,7 @@ class ImageMagickDelegates(ConanFile):
     }
 
     default_options = {
-      'conan':      npm_option('conan', True),
+      'conan':      npm_option('conan', False),
       'fonts':      npm_option('fonts', True) and npm_option('fonts-conan', True),
       'jpeg':       npm_option('jpeg', True) and npm_option('jpeg-conan', True),
       'png':        npm_option('png', True) and npm_option('png-conan', True),
@@ -118,7 +118,7 @@ class ImageMagickDelegates(ConanFile):
         self.requires('libxml2/2.12.6')
 
       if self.options.heif:
-        self.requires('libheif/1.13.0')
+        self.requires('libheif/1.16.2')
         self.requires('libaom-av1/3.6.0')
         self.requires('libde265/1.0.12')
 
@@ -126,7 +126,7 @@ class ImageMagickDelegates(ConanFile):
         self.requires('jbig/20160605')
 
       if self.options.exr:
-        self.requires('openexr/3.1.5')
+        self.requires('openexr/3.2.4')
 
       if self.options.png:
         self.requires('libpng/1.6.40')

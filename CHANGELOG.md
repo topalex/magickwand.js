@@ -2,18 +2,21 @@
 
 # [2.0.0]
 
- - ImageMagick 7.1.1-32
+ - ImageMagick 7.1.1-36
  - Completely redesigned fully portable build using the new `hadron` build system (`xpm` + `meson / node-api` + `conan`)
    - Fully self-contained static build that does not depend on any system libraries (`conan`)
    - Identical on all three supported OS - Linux, Windows and macOS - and browser WASM (`meson / node-api`)
    - No other requirements for the host machine besides Node.js and `npm`
    - Optional built-in C++ compiler (`xpm`)
-   - Optional light build against the system-installed shared libraries
+   - If rebuilding when installing, default build is now against the system-installed shared libraries
    - Fully configurable from the `npm install` command
    - New `CMake`-based build system for ImageMagick itself available as a stand-alone project targeted at portable open-source projects that distribute ImageMagick as source - https://github.com/mmomtchev/ImageMagick
    - Support rebuilding from source with Python 3.12 without `distutils`
  - Drop macOS 11 support
  - macOS 14 `arm64` prebuilt binaries and support for rebuilding from source on macOS 14 `arm64`
+ - The generation of the SWIG wrappers and the `npm` package is now reproducible and hosted in Github Actions, and the generated wrappers are included in the published package
+ - Drop X11 support from the prebuilt binaries for headless installation, X11 support now requires rebuilding from source
+ - Fix [#220](https://github.com/mmomtchev/magickwand.js/issues/220), distortion methods require C-style arrays
 
 
 ## [1.1.0] 2024-04-17

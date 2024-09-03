@@ -53,9 +53,10 @@ jobs:
             karma karma-chrome-launcher karma-mocha webpack webpack-cli ts-loader
         shell: bash
       - name: Download the package
-        uses: actions/download-artifact@v4
+        uses: robinraju/release-downloader@v1.11
         with:
-          name: ${{ inputs.package }}
+          tag: ${{ github.ref }}
+          fileName: ${{ inputs.package }}
         if: inputs.download
       - name: Install magickwand.js from ${{ inputs.package }}
         run: npm install ${{ inputs.package }}
@@ -67,7 +68,7 @@ jobs:
           mkdir -p deps/ImageMagick/config
           cp node_modules/magickwand.js/deps/ImageMagick/config/policy-websafe.xml deps/ImageMagick/config
       - name: Run the unit tests headless
-        uses: GabrielBB/xvfb-action@v1
+        uses: coactions/setup-xvfb@v1
         with:
           run: npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc --timeout 5000 test/*.test.ts
         env:
@@ -115,9 +116,10 @@ jobs:
             karma karma-chrome-launcher karma-mocha webpack webpack-cli ts-loader
         shell: bash
       - name: Download the package
-        uses: actions/download-artifact@v4
+        uses: robinraju/release-downloader@v1.11
         with:
-          name: ${{ inputs.package }}
+          tag: ${{ github.ref }}
+          fileName: ${{ inputs.package }}
         if: inputs.download
       - name: Install magickwand.js from ${{ inputs.package }}
         run: |
@@ -131,7 +133,7 @@ jobs:
           mkdir -p deps/ImageMagick/config
           cp node_modules/magickwand.js/deps/ImageMagick/config/policy-websafe.xml deps/ImageMagick/config
       - name: Run the unit tests headless
-        uses: GabrielBB/xvfb-action@v1
+        uses: coactions/setup-xvfb@v1
         with:
           run: npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc --timeout 5000 test/*.test.ts
         env:
@@ -161,9 +163,10 @@ jobs:
         run: sudo apt-get install -y fonts-ubuntu || true
         if: startsWith(matrix.platform, 'ubuntu')
       - name: Download the package
-        uses: actions/download-artifact@v4
+        uses: robinraju/release-downloader@v1.11
         with:
-          name: ${{ inputs.package }}
+          tag: ${{ github.ref }}
+          fileName: ${{ inputs.package }}
         if: inputs.download
       - name: Install magickwand.js from ${{ inputs.package }}
         run: |
@@ -217,9 +220,10 @@ jobs:
             karma karma-chrome-launcher karma-mocha webpack webpack-cli ts-loader
         shell: bash
       - name: Download the package
-        uses: actions/download-artifact@v4
+        uses: robinraju/release-downloader@v1.11
         with:
-          name: ${{ inputs.package }}
+          tag: ${{ github.ref }}
+          fileName: ${{ inputs.package }}
         if: inputs.download
       - name: Install magickwand.js from ${{ inputs.package }}
         run: |
@@ -239,7 +243,7 @@ jobs:
           mkdir -p deps/ImageMagick/config
           cp node_modules/magickwand.js/deps/ImageMagick/config/policy-websafe.xml deps/ImageMagick/config
       - name: Run the unit tests headless
-        uses: GabrielBB/xvfb-action@v1
+        uses: coactions/setup-xvfb@v1
         with:
           run: npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc --timeout 5000 test/*.test.ts
         env:
