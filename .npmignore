@@ -28,6 +28,10 @@ deps/ImageMagick/PerlMagick/**
 /deps/ImageMagick/Magick++/lib/Magick++-7.Q16HDRI.pc
 /deps/ImageMagick/local.exp
 
+deps/ImageMagick/conan-local/**
+!deps/ImageMagick/conan-local/recipes/cairo/**
+!deps/ImageMagick/conan-local/recipes/librsvg/**
+
 *.a
 *.o
 *.la
