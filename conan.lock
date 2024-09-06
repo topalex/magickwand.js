@@ -19,7 +19,7 @@
         "libwebp/1.3.2#52f69c4a31c5cf033fdd9230d77a8e38%1694806992.059",
         "libtiff/4.6.0#51d0e7e15d032aeec1b64e65c44ecd9f%1710002558.618",
         "libselinux/3.5#5c6cc0cf385b385a83b471491977b0f4%1717655459.889",
-        "librsvg/2.58.92",
+        "librsvg/2.58.94@ImageMagick",
         "libraw/0.21.2#a23d10ab30649e1b358ce6a725b511df%1703188166.862",
         "libpng/1.6.40#06f726bd4bfd83f5cdc10587826093f0%1706305804.552",
         "libmount/2.39#8a95198b2547a8ca7685eb7a1d002903%1705591483.106",
@@ -44,7 +44,7 @@
         "freetype/2.13.2#7934d59c447d72edcd56025dc60e1aeb%1714137854.529",
         "fontconfig/2.14.2#7dadc780ad05a1c3123a3644b5d6b14b%1713877185.452",
         "expat/2.6.0#2f92fb3cf504e9731aba6d20dcd641bf%1707241906.746",
-        "cairo/1.18.0#6133b44d7bf4cf69c5361cbc864f6a58%1713348784.042",
+        "cairo/1.18.0@ImageMagick",
         "bzip2/1.0.8#457c272f7da34cb9c67456dd217d36c4%1703591832.799",
         "brotli/1.1.0#d56d7bb9ca722942aba17369cb5c0519%1696161049.808"
     ],
@@ -100,12 +100,14 @@
             "harfbuzz/8.3.0"
         ],
         "libjpeg-turbo/3.0.2": [
-            "libjpeg-turbo/3.0.2",
-            null
+            null,
+            "libjpeg-turbo/3.0.2"
         ],
         "cairo/1.18.0": [
-            "cairo/1.18.0",
-            null
+            "cairo/1.18.0@ImageMagick"
+        ],
+        "librsvg/2.58.94": [
+            "librsvg/2.58.94@ImageMagick"
         ],
         "pixman/0.43.4#0dcdf859941e32fcc7bfb73ea1946a7f": [
             "pixman/0.43.4",
