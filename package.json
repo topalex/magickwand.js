@@ -1,6 +1,6 @@
 {
-  "name": "magickwand.js",
-  "version": "2.0.0-rc.5",
+  "name": "@topalex/magickwand.js",
+  "version": "2.0.0-rc.5.2-rsvg",
   "description": "JavaScript and TypeScript bindings for ImageMagick-7 - native and WASM",
   "main": "./native/index.cjs",
   "types": "./lib/index.d.ts",
@@ -55,11 +55,11 @@
     "module_name": "magickwand",
     "module_path": "./lib/binding/{platform}-{arch}",
     "remote_path": "v{version}",
-    "host": "https://github.com/mmomtchev/magickwand.js/releases/download/",
+    "host": "https://github.com/topalex/magickwand.js/releases/download/",
     "package_name": "{platform}-{arch}.tar.gz",
     "hosting": {
       "provider": "github",
-      "repo": "mmomtchev/magickwand.js"
+      "repo": "topalex/magickwand.js"
     },
     "napi_versions": [
       6
@@ -67,14 +67,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mmomtchev/magickwand.js.git"
+    "url": "git+https://github.com/topalex/magickwand.js.git"
   },
   "author": "Momtchil Momtchev <momtchil@momtchev.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mmomtchev/magickwand.js/issues"
+    "url": "https://github.com/topalex/magickwand.js/issues"
   },
-  "homepage": "https://github.com/mmomtchev/magickwand.js#readme",
+  "homepage": "https://github.com/topalex/magickwand.js#readme",
   "devDependencies": {
     "@octokit/core": "^6.0.1",
     "@types/chai": "^4.3.6",
