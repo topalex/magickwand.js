@@ -209,7 +209,7 @@ jobs:
 
 
   test_package:
-    uses: mmomtchev/magickwand.js/.github/workflows/test-package.yml@main
+    uses: ./.github/workflows/test-package.yml
     needs: create-npm-package
     with:
       package: magickwand.js-${{ needs.create-npm-package.outputs.version }}.tgz
