@@ -1,5 +1,5 @@
 {
-  "name": "@topalex/magickwand.js",
+  "name": "magickwand.js",
   "version": "2.0.0-rc.5.2-rsvg",
   "description": "JavaScript and TypeScript bindings for ImageMagick-7 - native and WASM",
   "main": "./native/index.cjs",
