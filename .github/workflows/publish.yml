@@ -204,8 +204,8 @@ jobs:
         allowUpdates: true
         artifacts: magickwand.js-${{ steps.version.outputs.version }}.tgz
         updateOnlyUnreleased: true
-        omitDraftDuringUpdate: true
         artifactErrorsFailBuild: true
+        prerelease: true
 
 
   test_package:
