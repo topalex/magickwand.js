@@ -250,7 +250,7 @@ Additionally, the following options control the various ImageMagick submodules. 
 * `--disable-jpeg2000` for `libopenjp2` and `jasper`
 * `--disable-jbig` for `libjbig`
 * `--disable-raw` for `libraw`
-* `--disable-jxl` for `libjxl` (*this is disabled by default as it is broken at the moment*)
+* `--disable-jxl` for `libjxl` (always disabled for WASM)
 * `--disable-exr` for `OpenEXR`
 * `--disable-fftw` for `FFTW3` (*this is disabled by default as it is broken at the moment*)
 * `--disable-heif` for `libheif`

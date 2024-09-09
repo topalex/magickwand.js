@@ -56,7 +56,7 @@ class ImageMagickDelegates(ConanFile):
       'tiff':       npm_option('tiff', True) and npm_option('tiff-conan', True),
       'webp':       npm_option('webp', True) and npm_option('webp-conan', True),
       'jpeg2000':   npm_option('jpeg2000', True) and npm_option('jpeg2000-conan', True),
-      'jxl':        npm_option('jxl', False) and npm_option('jxl-conan', True),
+      'jxl':        npm_option('jxl', True) and npm_option('jxl-conan', True),
       'raw':        npm_option('raw', True) and npm_option('raw-conan', True),
       'exr':        npm_option('exr', True) and npm_option('exr-conan', True),
       'fftw':       npm_option('fftw', False) and npm_option('fftw-conan', True),
@@ -112,7 +112,7 @@ class ImageMagickDelegates(ConanFile):
         self.requires('fftw/3.3.10')
 
       if self.options.color:
-        self.requires('lcms/2.14')
+        self.requires('lcms/2.16')
 
       if self.options.xml:
         self.requires('libxml2/2.12.6')
@@ -154,11 +154,9 @@ class ImageMagickDelegates(ConanFile):
       if self.options.rsvg and self.settings.arch != 'wasm':
         self.requires('librsvg/2.58.94', force=True)
 
-      if self.options.jxl:
-        self.requires('libjxl/0.6.1')
-        self.requires('brotli/1.1.0')
-        if self.options.simd and self.settings.arch != 'wasm':
-          self.requires('highway/1.0.3')
+      if self.options.jxl and self.settings.arch != 'wasm':
+        self.requires('libjxl/0.10.3', force=True)
+        self.requires('brotli/1.1.0', force=True)
 
       if self.options.openmp and self.settings.arch != 'wasm' and self.settings.os != 'Windows':
         self.requires('llvm-openmp/14.0.6')
@@ -202,11 +200,14 @@ class ImageMagickDelegates(ConanFile):
         self.options['pango'].with_freetype = fonts_enabled and self.settings.os != 'Windows'
         self.options['pango'].with_fontconfig = fonts_enabled and self.settings.os != 'Windows'
 
+      if self.options.jxl and self.settings.arch != 'wasm':
+        self.options['libjxl'].with_tcmalloc = False
+
       # While Emscripten supports SIMD, Node.js does not and cannot run the resulting WASM bundle
       # The performance gain is not very significant and it has a huge compatibility issue
       if self.options.webp and (self.settings.arch == 'wasm' or not self.options.simd):
         self.options['libwebp'].with_simd = False
-      
+
       # When building with emscripten, the main exe is called zstd.js and all symlinks are broken
       if self.settings.arch == 'wasm' and self.options.zstd:
         self.options['zstd'].build_programs = False

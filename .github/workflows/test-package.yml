@@ -172,7 +172,7 @@ jobs:
         run: |
           npm install --verbose --foreground-scripts                                     \
             ${{ inputs.package }} --build-from-source --disable-shared                   \
-            --disable-fonts --enable-jpeg --enable-png --disable-tiff                    \
+            --disable-fonts --enable-jpeg --enable-png --disable-tiff --disable-jxl      \
             --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia          \
             --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif  \
             --disable-color --disable-xml --enable-gzip --disable-zip --disable-rsvg     \

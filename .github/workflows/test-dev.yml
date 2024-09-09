@@ -170,7 +170,7 @@ jobs:
       - name: Build magickwand.js
         run: |
           npm install --build-from-source --verbose --foreground-scripts --enable-shared  \
-            --disable-fonts --enable-jpeg --enable-png --disable-tiff                     \
+            --disable-fonts --enable-jpeg --enable-png --disable-tiff --disable-jxl       \
             --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia           \
             --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif   \
             --disable-color --disable-xml --enable-gzip --disable-zip --disable-rsvg      \
@@ -291,7 +291,7 @@ jobs:
         run: |
           npm install --build-wasm-from-source --verbose --foreground-scripts           \
             --enable-conan                                                              \
-            --disable-fonts --enable-jpeg --enable-png --disable-tiff                   \
+            --disable-fonts --enable-jpeg --enable-png --disable-tiff --disable-jxl     \
             --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia         \
             --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif \
             --disable-color --disable-xml --enable-gzip --disable-zip --disable-rsvg    \
